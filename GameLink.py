@@ -9,17 +9,24 @@ def connect():
 
     # This is what we will be using to gather info from the api, what comes after the v2/ is where you put the
     # command that you want to get (friends, account, group, etc.) from this site: https://xbl.io/console
-    #response = requests.get('https://xbl.io/api/v2/friends', headers=headers)
+    # response = requests.get('https://xbl.io/api/v2/friends', headers=headers)
+
+    gt = input('Type in your Xbox Gamertag: ')
+    print()
+
+    # lookup by gamertag to get id
+    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
+    resp_data = response.json()
 
     # Use this to print header info if needed
     # print(response.headers)
 
-    gt = input('Type in your Xbox Gamertag: ')
-    # lookup by gamertag to get id
-    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
-    resp_data = response.json()
-    for data in resp_data['profileUsers']:
-        xuid = data['id']
+    try:
+        for data in resp_data['profileUsers']:
+            xuid = data['id']
+    except:
+        print('Gamertag not found!')
+        quit()
 
     # lookup by id to get data
     response = requests.get('https://xbl.io/api/v2/friends?xuid={}'.format(xuid), headers=headers)
@@ -34,7 +41,8 @@ def connect():
         print('Id: ' + person['xuid'])
         print('Gamerscore: ' + person['gamerScore'])
         print('Presence: ' + person['presenceState'])
-        print()
+        print('Gamerpic: ' + person['displayPicRaw'])
+
         # print games list for person
         print('Games: ')
         for achievement in achieve_data['titles']:
