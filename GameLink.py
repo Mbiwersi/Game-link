@@ -1,6 +1,9 @@
 # May have to install this package before using
+from urllib.request import urlopen, Request
+
 import requests
 import json
+import os
 
 def connect():
     # Need this header to tie into my account info. If you want to test with your account, replace the
@@ -8,7 +11,7 @@ def connect():
     #ryan token wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg
     #andrew token k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c
 
-    headers = {"X-Authorization": "k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c"}
+    headers = {"X-Authorization": "wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg"}
 
     # This is what we will be using to gather info from the api, what comes after the v2/ is where you put the
     # command that you want to get (friends, account, group, etc.) from this site: https://xbl.io/console
@@ -52,13 +55,23 @@ def connect():
         print('Presence: ' + person['presenceState'])
         print('Gamerpic: ' + person['displayPicRaw'])
 
+        # Gets and saves gamerpic in "gp{xuid}.png" format, has a default profile pic if call fails
+        try:
+            request = Request(person['displayPicRaw'], headers={'User-Agent': 'Mozilla/5.0'})
+            response = urlopen(request)
+            with open('gp' + str(person['xuid'] + '.png'), "wb") as f:
+                f.write(response.read())
+        except:
+            with open('gp' + str(person['xuid'] + '.png'), "wb") as f:
+                with open('defaultpic.png', 'rb') as overwrite:
+                    f.write(overwrite.read())
+
         # print games list for person
         print('Games: ')
         for achievement in achieve_data['titles']:
             print(achievement['name'])
         print()
         print()
-
 
 if __name__ == '__main__':
     connect()
