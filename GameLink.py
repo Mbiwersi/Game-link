@@ -59,10 +59,10 @@ def connect():
         try:
             request = Request(person['displayPicRaw'], headers={'User-Agent': 'Mozilla/5.0'})
             response = urlopen(request)
-            with open('Gamerpics/gp' + str(person['xuid'] + '.png'), "wb") as f:
+            with open('Gamerpics/' + str(person['xuid'] + '.png'), "wb") as f:
                 f.write(response.read())
         except:
-            with open('Gamerpics/gp' + str(person['xuid'] + '.png'), "wb") as f:
+            with open('Gamerpics/' + str(person['xuid'] + '.png'), "wb") as f:
                 with open('Gamerpics/defaultpic.png', 'rb') as overwrite:
                     f.write(overwrite.read())
 
