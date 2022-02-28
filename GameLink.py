@@ -59,11 +59,11 @@ def connect():
         try:
             request = Request(person['displayPicRaw'], headers={'User-Agent': 'Mozilla/5.0'})
             response = urlopen(request)
-            with open('gp' + str(person['xuid'] + '.png'), "wb") as f:
+            with open('Gamerpics/gp' + str(person['xuid'] + '.png'), "wb") as f:
                 f.write(response.read())
         except:
-            with open('gp' + str(person['xuid'] + '.png'), "wb") as f:
-                with open('defaultpic.png', 'rb') as overwrite:
+            with open('Gamerpics/gp' + str(person['xuid'] + '.png'), "wb") as f:
+                with open('Gamerpics/defaultpic.png', 'rb') as overwrite:
                     f.write(overwrite.read())
 
         # print games list for person
@@ -73,5 +73,14 @@ def connect():
         print()
         print()
 
+# Graceful program closing method
+def close():
+    print("Clearing gamerpic files...")
+    pics = os.listdir('Gamerpics')
+    for file in pics:
+        if file != 'defaultpic.png':
+            os.remove("Gamerpics/" + file)
+
 if __name__ == '__main__':
     connect()
+    close()
