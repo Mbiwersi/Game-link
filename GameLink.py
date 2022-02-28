@@ -55,7 +55,7 @@ def connect():
         print('Presence: ' + person['presenceState'])
         print('Gamerpic: ' + person['displayPicRaw'])
 
-        # Gets and saves gamerpic in "gp{xuid}.png" format, has a default profile pic if call fails
+        # Gets and saves gamerpic in "{xuid}.png" format, has a default profile pic if call fails
         try:
             request = Request(person['displayPicRaw'], headers={'User-Agent': 'Mozilla/5.0'})
             response = urlopen(request)
