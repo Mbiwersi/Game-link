@@ -17,29 +17,8 @@ def connect():
     # This is what we will be using to gather info from the api, what comes after the v2/ is where you put the
     # command that you want to get (friends, account, group, etc.) from this site: https://xbl.io/console
     #response = requests.get('https://xbl.io/api/v2/friends', headers=headers)
-    gt = input('Type in your Xbox Gamertag: ')
-    print()
 
-    # lookup by gamertag to get id
-    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
-    resp_data = response.json()
-
-    #Checks validity of gamertag and prompts the user again if it is invalid
-    while not( 'profileUsers' in resp_data.keys()):
-        print("!!Invalid Gamertag try again!!")
-        gt = input('Type in your Xbox Gamertag: ')
-        response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
-        resp_data = response.json()
-
-    # Use this to print header info if needed
-    # print(response.headers)
-
-    try:
-        for data in resp_data['profileUsers']:
-            xuid = data['id']
-    except:
-        print('Gamertag not found!')
-        quit()
+    xuid = get_user()
 
     # lookup by id to get data
     response = requests.get('https://xbl.io/api/v2/friends?xuid={}'.format(xuid), headers=headers)
@@ -61,16 +40,8 @@ def connect():
         print('Presence: ' + person['presenceState'])
         print('Gamerpic: ' + person['displayPicRaw'])
 
-        # Gets and saves gamerpic in "{xuid}.png" format, has a default profile pic if call fails
-        try:
-            request = Request(person['displayPicRaw'], headers={'User-Agent': 'Mozilla/5.0'})
-            response = urlopen(request)
-            with open('Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
-                f.write(response.read())
-        except:
-            with open('Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
-                with open('Gamerpics/defaultpic.png', 'rb') as overwrite:
-                    f.write(overwrite.read())
+        # Stores the gamer pic in ./Gamerpics
+        get_gamer_pic(person)
 
         # print games list for person
         print('Games: ')
@@ -78,6 +49,47 @@ def connect():
             print(achievement['name'])
         print()
         print()
+
+# prompt for Xbox Gamer tage and return the xuid
+def get_user():
+    gt = input('Type in your Xbox Gamertag: ')
+    print()
+
+    # lookup by gamertag to get id
+    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
+    resp_data = response.json()
+
+    # Checks validity of gamertag and prompts the user again if it is invalid
+    while not ('profileUsers' in resp_data.keys()):
+        print("!!Invalid Gamertag try again!!")
+        gt = input('Type in your Xbox Gamertag: ')
+        response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
+        resp_data = response.json()
+
+    # Use this to print header info if needed
+    # print(response.headers)
+
+    try:
+        for data in resp_data['profileUsers']:
+            xuid = data['id']
+    except:
+        print('Gamertag not found!')
+        quit()
+
+    return xuid
+
+def get_gamer_pic(person):
+    # Gets and saves gamerpic in "{xuid}.png" format, has a default profile pic if call fails
+    try:
+        request = Request(person['displayPicRaw'], headers={'User-Agent': 'Mozilla/5.0'})
+        response = urlopen(request)
+        with open('Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
+            f.write(response.read())
+    except:
+        with open('Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
+            with open('Gamerpics/defaultpic.png', 'rb') as overwrite:
+                f.write(overwrite.read())
+
 
 # Graceful program closing method
 def close():
@@ -88,7 +100,8 @@ def close():
             os.remove("Gamerpics/" + file)
 
 # of the selected friends return the games that you have in common with those friends
-# currently just finds the games in common with every friend, will change later so that all the selected friends have games in common
+# currently just finds the games in common with every friend
+#   will change later so that all the selected friends have games in common
 # return a dict in the form of {'friend_displayName1': [game1, game2, ...] 'friend_displayName2': [game1, game2, ...}
 def findMatches(selectedFriends):
     # Gets the current user's games
@@ -121,7 +134,7 @@ def findMatches(selectedFriends):
         gamesincommon[friend['displayName']] = friendGamesIncommon # can swap for xuid if we want instead of displayName
 
         print()
-    print(gamesincommon)
+    # print(gamesincommon)
     return gamesincommon
 
 if __name__ == '__main__':
