@@ -2,10 +2,11 @@
 from urllib.request import urlopen, Request
 
 import requests
-import json
 import os
 
-headers = {"X-Authorization": "wsg8gwgsc48ogwskcwggcswgs840ok04o04"}
+headers = {"X-Authorization": "wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg"}
+player = dict()
+friends = dict()
 
 
 def connect():
@@ -13,44 +14,44 @@ def connect():
     # key from the OpenXBL Site
     #ryan token wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg
     #andrew token k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c
-
-    # This is what we will be using to gather info from the api, what comes after the v2/ is where you put the
-    # command that you want to get (friends, account, group, etc.) from this site: https://xbl.io/console
-    #response = requests.get('https://xbl.io/api/v2/friends', headers=headers)
+    #michael token wsg8gwgsc48ogwskcwggcswgs840ok04o04
 
     xuid = get_user()
+    player['xuid'] = xuid
 
     # lookup by id to get data
     response = requests.get('https://xbl.io/api/v2/friends?xuid={}'.format(xuid), headers=headers)
     resp_data = response.json()
 
-    # find the games that match with all friends
-    # Currently just does all friends
-    findMatches(resp_data)
-
-
     # Parsing out from friends
     for person in resp_data['people']:
-        ach_resp = requests.get('https://xbl.io/api/v2/achievements/player/{}'.format(person['xuid']), headers=headers)
-        achieve_data = ach_resp.json()
 
-        print('Player: ' + person['displayName'])
-        print('Id: ' + person['xuid'])
-        print('Gamerscore: ' + person['gamerScore'])
-        print('Presence: ' + person['presenceState'])
-        print('Gamerpic: ' + person['displayPicRaw'])
+        friend_data = dict()
+
+        friend_data['xuid'] = person['xuid']
+        friend_data['presenceState'] = person['presenceState']
+        friend_data['isFavorite'] = person['isFavorite']
+        friend_data['gamerScore'] = person['gamerScore']
 
         # Stores the gamer pic in ./Gamerpics
         get_gamer_pic(person)
 
-        # print games list for person
-        print('Games: ')
-        for achievement in achieve_data['titles']:
-            print(achievement['name'])
-        print()
-        print()
+        friend = {person['displayName']: friend_data}
+        friends.update(friend)
 
-# prompt for Xbox Gamer tage and return the xuid
+    # find the games that match with all friends
+    # Currently just does all friends
+    findMatches(resp_data)
+
+    # TEST WITH FRIENDS AS IF SELECTED IN GUI
+    print(compare_selected(['SEIBERTINSANO81', 'DJameZzz55', 'RyJay84', 'CalibratedGore2']))
+
+    # print out stored friend data
+    for friend in friends:
+        print()
+        print(friend + ': ' + str(friends[friend]))
+
+# prompt for Xbox Gamer tag and return the xuid
 def get_user():
     gt = input('Type in your Xbox Gamertag: ')
     print()
@@ -68,13 +69,8 @@ def get_user():
 
     # Use this to print header info if needed
     # print(response.headers)
-
-    try:
-        for data in resp_data['profileUsers']:
-            xuid = data['id']
-    except:
-        print('Gamertag not found!')
-        quit()
+    for data in resp_data['profileUsers']:
+        xuid = data['id']
 
     return xuid
 
@@ -113,29 +109,52 @@ def findMatches(selectedFriends):
     for game in myGamesData['titles']:
         print(game['name'])
         myGames.append(game['name'])
-    print()
-    print()
     print(myGames)
+    player['games'] = myGames
 
-    gamesincommon = {}
+    print()
+    print()
 
     # Gets each friends achievements
     for friend in selectedFriends['people']:
         ach_resp = requests.get('https://xbl.io/api/v2/achievements/player/{}'.format(friend['xuid']), headers=headers)
         achieve_data = ach_resp.json()
         print("Friend {} has these games in common:".format(friend['displayName']))
-        friendGamesIncommon = []
+        friendGamesInCommon = []
 
         # Gets the games of all the friends
         for game in achieve_data['titles']:
             if game['name'] in myGames:
                 print(game['name'])
-                friendGamesIncommon.append(game['name'])
-        gamesincommon[friend['displayName']] = friendGamesIncommon # can swap for xuid if we want instead of displayName
+                friendGamesInCommon.append(game['name'])
+
+        # Adding games in common to stored friends data
+        friends[friend['displayName']]['gamesInCommon'] = friendGamesInCommon
 
         print()
-    # print(gamesincommon)
-    return gamesincommon
+
+# takes a list of the display names of selected friends and returns a list of the games that all friends have in common
+def compare_selected(selected):
+    in_common = []
+    first_selected = True
+    for friend in selected:
+        if first_selected:
+            first_selected = False
+            in_common = friends[friend]['gamesInCommon']
+        else:
+            for games_common in in_common:
+                in_both = False
+                for games in friends[friend]['gamesInCommon']:
+                    if games_common == games:
+                        in_both = True
+                        break
+                if not in_both:
+                    in_common.remove(games_common)
+
+    return in_common
+
+
+
 
 if __name__ == '__main__':
     connect()
