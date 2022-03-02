@@ -44,7 +44,7 @@ def connect():
     findMatches(resp_data)
 
     # TEST WITH FRIENDS AS IF SELECTED IN GUI
-    print(compare_selected(['SEIBERTINSANO81', 'DJameZzz55', 'RyJay84', 'CalibratedGore2']))
+    print(compare_selected(['RyJay84', 'very damp', 'TryhardNinja480']))
 
     # print out stored friend data
     for friend in friends:
@@ -98,11 +98,11 @@ def close():
 # of the selected friends return the games that you have in common with those friends
 # currently just finds the games in common with every friend
 #   will change later so that all the selected friends have games in common
-# return a dict in the form of {'friend_displayName1': [game1, game2, ...] 'friend_displayName2': [game1, game2, ...}
 def findMatches(selectedFriends):
     # Gets the current user's games
-    ach_resp = requests.get('https://xbl.io/api/v2/achievements/', headers=headers)
+    ach_resp = requests.get('https://xbl.io/api/v2/achievements/player/{}'.format(player['xuid']), headers=headers)
     myGamesData = ach_resp.json()
+    print(myGamesData)
 
     myGames = []
     print('MyGames: ')
