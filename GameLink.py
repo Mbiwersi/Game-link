@@ -44,7 +44,9 @@ def connect():
     findMatches(resp_data)
 
     # TEST WITH FRIENDS AS IF SELECTED IN GUI
-    print(compare_selected(['RyJay84', 'very damp', 'TryhardNinja480']))
+    compare_list = ['Yellowacorn101', 'StinkyTurtlShel', 'JettH17', 'PostalBeatle398', 'SEIBERTINSANO81']
+    print('Shared games with: {}'.format(compare_list))
+    print(compare_selected(compare_list))
 
     # print out stored friend data
     for friend in friends:
@@ -102,14 +104,12 @@ def findMatches(selectedFriends):
     # Gets the current user's games
     ach_resp = requests.get('https://xbl.io/api/v2/achievements/player/{}'.format(player['xuid']), headers=headers)
     myGamesData = ach_resp.json()
-    print(myGamesData)
 
     myGames = []
     print('MyGames: ')
     for game in myGamesData['titles']:
         print(game['name'])
         myGames.append(game['name'])
-    print(myGames)
     player['games'] = myGames
 
     print()
@@ -142,14 +142,15 @@ def compare_selected(selected):
             first_selected = False
             in_common = friends[friend]['gamesInCommon']
         else:
+            new_in_common = []
             for games_common in in_common:
                 in_both = False
                 for games in friends[friend]['gamesInCommon']:
                     if games_common == games:
                         in_both = True
+                        new_in_common.append(games_common)
                         break
-                if not in_both:
-                    in_common.remove(games_common)
+            in_common = new_in_common
 
     return in_common
 
