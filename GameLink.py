@@ -4,6 +4,7 @@ from tkinter import *
 import requests
 import os
 from threading import Thread
+import app as gui
 
 headers = {"X-Authorization": "wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg"}
 player = dict()
@@ -145,14 +146,7 @@ def compare_selected(selected):
 
 
 def start_gui():
-    window = Tk()
-    window.title('Xbox Game Link')
-    window.geometry('900x700')
-
-    un = Entry(window, width=50)
-    un.grid(row=0, column=0)
-    window.mainloop()
-
+    gui.start()
 
 def get_friend_data(person):
     friend_data = dict()
@@ -186,6 +180,8 @@ def get_my_games():
 
 
 if __name__ == '__main__':
-    # start_gui()
-    connect()
+
+   # connect()
+
+    start_gui()
     close()

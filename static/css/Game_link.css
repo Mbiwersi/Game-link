@@ -1,0 +1,21 @@
+*{
+    padding: 0em;
+    margin: 0em;
+}
+
+
+header{
+    color: #68cb58;
+    background-color: #5a5959;
+    text-align: center;
+}
+
+form.profilePrompt{
+    padding: 1em;
+    font-size: 2em;
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #5a5959;
+    color: #68cb58;
+    border: black 1px solid;
+}
