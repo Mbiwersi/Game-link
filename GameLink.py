@@ -146,6 +146,7 @@ def compare_selected(selected):
 
 
 def start_gui():
+    #renders flask project !!!STILL NEEDS BACK END CODE!!!! comment out if working on no gui side
     gui.start()
 
 def get_friend_data(person):
