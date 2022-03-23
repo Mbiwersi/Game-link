@@ -6,19 +6,19 @@ import os
 from threading import Thread
 import app as gui
 
-headers = {"X-Authorization": "wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg"}
+headers = {"X-Authorization": "wsg8gwgsc48ogwskcwggcswgs840ok04o04"}
 player = dict()
 friends = dict()
 
 
-def connect():
+def connect(gt):
     # Need this header to tie into my account info. If you want to test with your account, replace the
     # key from the OpenXBL Site
     # ryan token wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg
     # andrew token k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c
     # michael token wsg8gwgsc48ogwskcwggcswgs840ok04o04
 
-    xuid = get_user()
+    xuid = get_user(gt)
     player['xuid'] = xuid
 
     # lookup by id to get data
@@ -67,9 +67,9 @@ def get_prof(gamer_tag):
 
 
 # prompt for Xbox Gamer tag and return the xuid
-def get_user():
-    gt = input('Type in your Xbox Gamertag: ')
-    print()
+def get_user(gt):
+    # gt = input('Type in your Xbox Gamertag: ')
+    # print()
 
     # lookup by gamertag to get id
     response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
@@ -162,6 +162,7 @@ def get_friend_data(person):
     friend_data['presenceState'] = person['presenceState']
     friend_data['isFavorite'] = person['isFavorite']
     friend_data['gamerScore'] = person['gamerScore']
+    friend_data['displayPicRaw'] = person['displayPicRaw']
 
     # Stores the gamer pic in ./Gamerpics
     get_gamer_pic(person)
@@ -188,7 +189,7 @@ def get_my_games():
 
 if __name__ == '__main__':
 
-   # connect()
+    # connect()
 
     start_gui()
     close()
