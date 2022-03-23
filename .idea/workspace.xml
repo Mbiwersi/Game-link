@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62db52b8-57b4-419d-8336-00557c64162c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/gamelink.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/gamelink.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Game_link.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Game_link.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +123,7 @@
       <workItem from="1647357855227" duration="473000" />
       <workItem from="1647358413348" duration="2687000" />
       <workItem from="1647362706486" duration="339000" />
-      <workItem from="1648055200336" duration="701000" />
+      <workItem from="1648055200336" duration="2401000" />
     </task>
     <servers />
   </component>
@@ -144,7 +144,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Game_Link$GameLink.coverage" NAME="GameLink Coverage Results" MODIFIED="1647362708489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Game_Link$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1647358685750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/GameLink_py$GameLink.coverage" NAME="GameLink Coverage Results" MODIFIED="1648056312348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GameLink_py$GameLink.coverage" NAME="GameLink Coverage Results" MODIFIED="1648058094241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Game_Link$Game_Link.coverage" NAME="Game_Link Coverage Results" MODIFIED="1647357421368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

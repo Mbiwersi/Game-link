@@ -10,6 +10,9 @@ app = Flask(__name__)
 def hello_world():  # put application's code here
     return render_template("Game_link.html")
 
+
+
+
 def start():
     app.run(debug=True)
 
