@@ -60,6 +60,12 @@ def connect():
         print(friend + ': ' + str(friends[friend]))
 
 
+def get_prof(gamer_tag):
+    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gamer_tag), headers=headers)
+    resp_data = response.json()
+    return resp_data
+
+
 # prompt for Xbox Gamer tag and return the xuid
 def get_user():
     gt = input('Type in your Xbox Gamertag: ')
