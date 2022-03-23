@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+import wtf as wtf
+from flask import Flask, render_template ,request
+
 import GameLink as gl
 
 app = Flask(__name__)
