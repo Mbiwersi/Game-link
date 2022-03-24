@@ -48,6 +48,7 @@ function loadFriends() {
     $('#friends-container').append(`<button type="button" id="more-friends-btn" class="btn btn-primary">Show More</button>`)
     
     $('#more-friends-btn').click( () => {
+      $('#loading').text("All Friends")
       $('#more-friends-btn').hide()
       friendslist.forEach(friend => {
         if(!friends[friend].isFavorite){
