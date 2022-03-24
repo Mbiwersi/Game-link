@@ -12,6 +12,7 @@ header{
     color: #68cb58;
     background-color: #5a5959;
     text-align: center;
+    padding: 1%;
 }
 
 form.profilePrompt{
@@ -38,6 +39,8 @@ form.profilePrompt{
     font-weight: bold;
     display: block;
     text-align: center;
+    font-size: xx-large;
+    margin: 2%;
 }
 
 #friends-container {

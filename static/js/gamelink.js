@@ -35,14 +35,40 @@ function loadFriends() {
   .then(function (friends){
     friendslist = Object.keys(friends)
     friendslist.forEach(friend => {
-      $(`#friends`).append(`
+      if(friends[friend].isFavorite){
+        $(`#friends`).append(`
       <li>
         <img src=${friends[friend].displayPicRaw}/>
         <h1>${friend}</h1>
         <p>${friends[friend].presenceState}</p>
       </li>`
       )
+      }
     });
-    $('#loading').text("Friends")
+    $('#friends-container').append(`<button type="button" id="more-friends-btn" class="btn btn-primary">Show More</button>`)
+    
+    $('#more-friends-btn').click( () => {
+      $('#more-friends-btn').hide()
+      friendslist.forEach(friend => {
+        if(!friends[friend].isFavorite){
+          $(`#friends`).append(`
+        <li>
+          <img src=${friends[friend].displayPicRaw}/>
+          <h1>${friend}</h1>
+          <p>${friends[friend].presenceState}</p>
+        </li>`
+        )
+        }
+      });
+    });
+
+    $('#loading').text("Favorite Friends")
   })
+}
+
+function clearElementById(id) {
+  let e = document.getElementById(id);
+  while(e.firstChild){
+      e.firstChild.remove();
+  }
 }
