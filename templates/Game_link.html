@@ -17,13 +17,16 @@
         <input type="text" id="usrname" >
         <input type="submit" value="Search" onclick="loadProfile()">
     </form>
+    <div id="friends-container">
+        <h1>Friends</h1>
+        <span id="loading">Loading Friends ...</span>
+        <form id="selectFriends"></form>
+    </div>
+    <div id="profile">
+        <span id="welcome"></span>
+        <img id="profilePicture">
+    </div>
+
 </body>
-<div id="profile">
-    <span id="welcome"></span>
-    <img id="profilePicture">
-</div>
-<div id="friends-container">
-    <h1 id="loading">Loading Friends ...</h1>
-    <ul id="friends"></ul>
-</div>
+
 </html>

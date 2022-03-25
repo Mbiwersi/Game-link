@@ -36,12 +36,17 @@ function loadFriends() {
     friendslist = Object.keys(friends)
     friendslist.forEach(friend => {
       if(friends[friend].isFavorite){
-        $(`#friends`).append(`
-      <li>
-        <img src=${friends[friend].displayPicRaw}/>
-        <h1>${friend}</h1>
-        <p>${friends[friend].presenceState}</p>
-      </li>`
+        $(`#selectFriends`).append(`
+        <label for="${friend}">
+          <img src=${friends[friend].displayPicRaw} onerror="this.onerror=null; this.src=/Gamerpics/defaultpic.png;"/>
+          
+          <p>
+            <span>${friend}</span>
+            ${friends[friend].presenceState}
+          </p>
+        </label>
+         <input type="checkbox" id="${friend}">
+       `
       )
       }
     });
@@ -54,9 +59,12 @@ function loadFriends() {
         if(!friends[friend].isFavorite){
           $(`#friends`).append(`
         <li>
-          <img src=${friends[friend].displayPicRaw}/>
-          <h1>${friend}</h1>
-          <p>${friends[friend].presenceState}</p>
+          <img src=${friends[friend].displayPicRaw} onerror="this.onerror=null; this.src=/Gamerpics/defaultpic.png;"/>
+          
+          <p>
+            <span>${friend}</span>
+            ${friends[friend].presenceState}
+          </p>
         </li>`
         )
         }
@@ -64,7 +72,12 @@ function loadFriends() {
     });
 
     $('#loading').text("Favorite Friends")
-  })
+  }).catch(function (error){
+    $("#loading").hide();
+    $("#friends-container").append($("<span> Sorry no friends where found </span>"));
+  }
+
+  )
 }
 
 function clearElementById(id) {

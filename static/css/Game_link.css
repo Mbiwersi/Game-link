@@ -13,16 +13,18 @@ header{
     background-color: #5a5959;
     text-align: center;
     padding: 1%;
+    justify-content: start;
 }
 
 form.profilePrompt{
     padding: 1em;
-    font-size: 2em;
+    font-size: 1.5em;
     font-family: sans-serif;
     text-align: center;
     background-color: #5a5959;
     color: #68cb58;
     border: black 1px solid;
+    justify-content:;
 }
 
 #profilePicture {
@@ -34,6 +36,11 @@ form.profilePrompt{
     margin-right: auto;
 }
 
+#profile{
+    width: 40%;
+}
+
+
 #welcome {
     color:#68cb58;
     font-weight: bold;
@@ -41,23 +48,31 @@ form.profilePrompt{
     text-align: center;
     font-size: xx-large;
     margin: 2%;
+
+
 }
 
 #friends-container {
-    margin-left: 5%;
-    width: 40%;
+    padding: 2em;
+    width: 20%;
+    justify-content: start;
+    background-color: #5a5959;
+    border: 1px solid #68cb58;
 }
 
 
-#friends li {
+#selectFriends  {
     background-color: gray;
     color: white;
     margin-bottom: 1em;
     padding: 2%;
     display: flex;
+    font-size: .75em;
+    flex-flow: column wrap;
+
 }
 
-#friends img {
+#selectFriends img {
     height: 10%;
     width: 10%;
     border-radius: 50%;

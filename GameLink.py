@@ -6,7 +6,7 @@ import os
 from threading import Thread
 import app as gui
 
-headers = {"X-Authorization": "wsg8gwgsc48ogwskcwggcswgs840ok04o04"}
+headers = {"X-Authorization": "k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c"}
 player = dict()
 friends = dict()
 
@@ -55,9 +55,9 @@ def connect(gt):
     # print(compare_selected(compare_list))
 
     # print out stored friend data
-    for friend in friends:
-        print()
-        print(friend + ': ' + str(friends[friend]))
+    #for friend in friends:
+        #print()
+        #print(friend + ': ' + str(friends[friend]))
 
 
 def get_prof(gamer_tag):
@@ -94,23 +94,23 @@ def get_user(gt):
 def get_gamer_pic(person):
     # Gets and saves gamerpic in "{xuid}.png" format, has a default profile pic if call fails
     try:
+
         request = Request(person['displayPicRaw'], headers={'User-Agent': 'Mozilla/5.0'})
         response = urlopen(request)
-        with open('Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
+        with open('static/Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
             f.write(response.read())
     except:
-        with open('Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
-            with open('Gamerpics/defaultpic.png', 'rb') as overwrite:
+        with open('static/Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
+            with open('static/Gamerpics/defaultpic.png', 'rb') as overwrite:
                 f.write(overwrite.read())
 
 
 # Graceful program closing method
 def close():
     print("Clearing gamerpic files...")
-    pics = os.listdir('Gamerpics')
-    for file in pics:
-        if file != 'defaultpic.png':
-            os.remove("Gamerpics/" + file)
+    for pic in os.listdir("static/Gamerpics"):
+        if pic != "defaultpic.png" :
+            os.remove("static/Gamerpics/"+pic);
 
 
 # of the selected friends return the games that you have in common with those friends
@@ -164,7 +164,7 @@ def get_friend_data(person):
     friend_data['gamerScore'] = person['gamerScore']
     friend_data['displayPicRaw'] = person['displayPicRaw']
 
-    # Stores the gamer pic in ./Gamerpics
+    # Stores the gamer pic in ./static/Gamerpics
     get_gamer_pic(person)
 
     friend = {person['displayName']: friend_data}
