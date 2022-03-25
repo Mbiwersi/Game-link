@@ -11,6 +11,10 @@
 <body>
     <header>
         <h1>XB-GameLink</h1>
+        <div id="profile">
+            <span id="welcome"></span>
+        <img id="profilePicture">
+    </div>
     </header>
     <form class="profilePrompt" method="post" onsubmit="return false">
         <label for="usrname">Please input your user name :</label>
@@ -20,11 +24,13 @@
     <div id="friends-container">
         <h1>Friends</h1>
         <span id="loading">Loading Friends ...</span>
-        <form id="selectFriends"></form>
+        <form id="selectFriends" onsubmit="return false">
+           <div  id="friendButtons" class="btn-group-toggle" data-toggle="buttons">
+           </div>
+        </form>
     </div>
-    <div id="profile">
-        <span id="welcome"></span>
-        <img id="profilePicture">
+    <div id="games">
+
     </div>
 
 </body>

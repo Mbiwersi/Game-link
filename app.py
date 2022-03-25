@@ -21,7 +21,8 @@ def get_prof(gt):
 
 @app.route('/profile/<gt>/friends')
 def get_friends(gt):
-    gl.connect(gt)
+    if gl.friends == {} :
+        gl.connect(gt)
     return gl.friends
 
 

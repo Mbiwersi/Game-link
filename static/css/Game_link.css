@@ -11,9 +11,13 @@ body {
 header{
     color: #68cb58;
     background-color: #5a5959;
-    text-align: center;
+    display: flex;
     padding: 1%;
-    justify-content: start;
+
+}
+header>h1{
+
+
 }
 
 form.profilePrompt{
@@ -24,20 +28,22 @@ form.profilePrompt{
     background-color: #5a5959;
     color: #68cb58;
     border: black 1px solid;
-    justify-content:;
+    justify-content:end;
 }
 
 #profilePicture {
     border-radius: 50%;
-    width: 10%;
-    height: 10%;
+    width: 3.5em;
+    height: 3.5em;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
 #profile{
-    width: 40%;
+    display: block;
+    justify-content: end;
+    width: 20%;
 }
 
 
@@ -46,8 +52,8 @@ form.profilePrompt{
     font-weight: bold;
     display: block;
     text-align: center;
-    font-size: xx-large;
-    margin: 2%;
+    font-size: 1em;
+
 
 
 }
@@ -58,6 +64,21 @@ form.profilePrompt{
     justify-content: start;
     background-color: #5a5959;
     border: 1px solid #68cb58;
+}
+
+#games{
+    width: 70%;
+
+    background-color: #5a5959;
+    justify-content: end;
+}
+.game{
+    width: 20%;
+    border: 1px solid #68cb58;
+}
+.gameimg{
+    width: 7em;
+    height: 7em;
 }
 
 
@@ -72,9 +93,15 @@ form.profilePrompt{
 
 }
 
+.profile{
+    margin-top:.5em;
+    width: 100%;
+}
+
+
 #selectFriends img {
-    height: 10%;
-    width: 10%;
+    height: 2em;
+    width: 2em;
     border-radius: 50%;
     margin-right: 2%;
 }

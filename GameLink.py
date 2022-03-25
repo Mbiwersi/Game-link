@@ -7,7 +7,10 @@ from threading import Thread
 import app as gui
 
 headers = {"X-Authorization": "k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c"}
+
+#Now a list of objects so that the front end can access game urls
 player = dict()
+
 friends = dict()
 
 
@@ -55,14 +58,17 @@ def connect(gt):
     # print(compare_selected(compare_list))
 
     # print out stored friend data
-    #for friend in friends:
-        #print()
-        #print(friend + ': ' + str(friends[friend]))
+    # for friend in friends:
+    # print()
+    # print(friend + ': ' + str(friends[friend]))
 
 
+# gets the users profile information and games list
 def get_prof(gamer_tag):
     response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gamer_tag), headers=headers)
     resp_data = response.json()
+    get_my_games()
+    resp_data['games'] = player['games']
     return resp_data
 
 
@@ -73,6 +79,7 @@ def get_user(gt):
 
     # lookup by gamertag to get id
     response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
+
     resp_data = response.json()
 
     # Checks validity of gamertag and prompts the user again if it is invalid
@@ -109,8 +116,8 @@ def get_gamer_pic(person):
 def close():
     print("Clearing gamerpic files...")
     for pic in os.listdir("static/Gamerpics"):
-        if pic != "defaultpic.png" :
-            os.remove("static/Gamerpics/"+pic);
+        if pic != "defaultpic.png":
+            os.remove("static/Gamerpics/" + pic);
 
 
 # of the selected friends return the games that you have in common with those friends
@@ -120,12 +127,15 @@ def find_matches(friend):
     ach_resp = requests.get('https://xbl.io/api/v2/achievements/player/{}'.format(friends[friend]['xuid']),
                             headers=headers)
     achieve_data = ach_resp.json()
+
     friend_games_in_common = []
 
     # Gets the games of all the friends
-    for game in achieve_data['titles']:
-        if game['name'] in player['games']:
-            friend_games_in_common.append(game['name'])
+    if 'titles' in achieve_data:
+        for game in achieve_data['titles']:
+            if game['name'] in [x['name'] for x in player['games']]:
+                friend_games_in_common.append(game['name'])
+
 
     # Adding games in common to stored friends data
     friends[friend]['games_in_common'] = friend_games_in_common
@@ -152,8 +162,9 @@ def compare_selected(selected):
 
 
 def start_gui():
-    #renders flask project !!!STILL NEEDS BACK END CODE!!!! comment out if working on no gui side
+    # renders flask project !!!STILL NEEDS BACK END CODE!!!! comment out if working on no gui side
     gui.start()
+
 
 def get_friend_data(person):
     friend_data = dict()
@@ -178,9 +189,11 @@ def get_my_games():
 
     my_games = []
     print('MyGames: ')
+    # !!!!FILTERS FOR XBOX ONE AND PC GAMES ONLY TO SAVE SPACE
     for game in my_games_data['titles']:
-        print(game['name'])
-        my_games.append(game['name'])
+        print(game["name"])
+        if "XboxOne" in game["devices"] or "XboxSeries" in game["devices"] or "PC" in game["devices"]:
+            my_games.append({'name': game['name'], 'image': game["displayImage"]})
     player['games'] = my_games
 
     print()
@@ -188,7 +201,6 @@ def get_my_games():
 
 
 if __name__ == '__main__':
-
     # connect()
 
     start_gui()

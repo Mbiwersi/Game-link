@@ -22,12 +22,19 @@ function loadProfile() {
       $("#welcome").text("Welcome " + profile.profileUsers[0].settings[2].value);
       $("#profile").show("slow");
       $('#friends-container').show();
+      profile.games.forEach(function (game){
+        $("#games").append("<div class='game'><img class='gameimg' src='" + game.image + "'><span>"+ game.name +"</span></div>");
+      });
+
     })
     .catch(function (error) {
       alert("Invalid Gamertag Try again");
       $(".profilePrompt").show("slow");
     });
 }
+
+
+
 
 function loadFriends() {
   fetch("profile/" + username +"/friends")
@@ -36,18 +43,20 @@ function loadFriends() {
     friendslist = Object.keys(friends)
     friendslist.forEach(friend => {
       if(friends[friend].isFavorite){
-        $(`#selectFriends`).append(`
-        <label for="${friend}">
+        $(`#friendButtons`).append(`
+        <label for="${friend}" class="btn btn-secondary active profile">
           <img src=${friends[friend].displayPicRaw} onerror="this.onerror=null; this.src=/Gamerpics/defaultpic.png;"/>
           
           <p>
             <span>${friend}</span>
             ${friends[friend].presenceState}
           </p>
+          <input type="checkbox" id="${friend}">
         </label>
-         <input type="checkbox" id="${friend}">
+         
        `
       )
+
       }
     });
     $('#friends-container').append(`<button type="button" id="more-friends-btn" class="btn btn-primary">Show More</button>`)
