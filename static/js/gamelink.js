@@ -12,7 +12,7 @@ function loadProfile() {
   username = $("#usrname").val();
   $('#loading').show()
 
-  loadFriends()
+  //loadFriends()
 
   $(".profilePrompt").hide("slow");
   fetch("profile/"+ username)
@@ -25,15 +25,15 @@ function loadProfile() {
       profile.games.forEach(function (game){
         $("#games").append("<div class='game'><img class='gameimg' src='" + game.image + "'><span>"+ game.name +"</span></div>");
       });
-
+      loadFriends()
     })
     .catch(function (error) {
       alert("Invalid Gamertag Try again");
       $(".profilePrompt").show("slow");
     });
+
+
 }
-
-
 
 
 function loadFriends() {

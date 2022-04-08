@@ -15,18 +15,15 @@ def hello_world():  # put application's code here
 
 @app.route('/profile/<gt>')
 def get_prof(gt):
-    gamer_tag = request.args.get('gt')
-    # return gamer_tag
-    return gl.get_prof(gt)
+    #gamer_tag = request.args.get('gt')
+    return gl.connect(gt)
 
 @app.route('/profile/<gt>/friends')
 def get_friends(gt):
-    if gl.friends == {} :
-        gl.connect(gt)
+    if gl.friends == {}:
+        print("no friends")
+        #gl.connect(gt)
     return gl.friends
-
-
 
 def start():
     app.run(debug=True)
-

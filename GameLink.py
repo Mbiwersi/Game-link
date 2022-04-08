@@ -6,7 +6,7 @@ import os
 from threading import Thread
 import app as gui
 
-headers = {"X-Authorization": "k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c"}
+headers = {"X-Authorization": "wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg"}
 
 #Now a list of objects so that the front end can access game urls
 player = dict()
@@ -21,16 +21,24 @@ def connect(gt):
     # andrew token k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c
     # michael token wsg8gwgsc48ogwskcwggcswgs840ok04o04
 
-    xuid = get_user(gt)
+    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
+    resp_data = response.json()
+
+    # Get xuid
+    xuid = 0
+    for data in resp_data['profileUsers']:
+        xuid = data['id']
+
+    # set xuid
     player['xuid'] = xuid
 
     # lookup by id to get data
     response = requests.get('https://xbl.io/api/v2/friends?xuid={}'.format(xuid), headers=headers)
-    resp_data = response.json()
+    resp_friends = response.json()
 
     threads = list()
     # Parsing out from friends
-    for person in resp_data['people']:
+    for person in resp_friends['people']:
         t1 = Thread(target=get_friend_data, args=[person])
         t1.start()
         threads.append(t1)
@@ -41,16 +49,16 @@ def connect(gt):
     # get player's games
     get_my_games()
 
-    # find the games that match with all friends
-    # Currently just does all friends
-    threads = list()
-    for friend in friends:
-        t1 = Thread(target=find_matches, args=[friend])
-        t1.start()
-        threads.append(t1)
-
-    for thread in threads:
-        thread.join()
+    #find  the games that match with all friends
+    #Currently just does all friends
+    # threads = list()
+    # for friend in friends:
+    #     t1 = Thread(target=find_matches, args=[friend])
+    #     t1.start()
+    #     threads.append(t1)
+    #
+    # for thread in threads:
+    #     thread.join()
 
     # TEST WITH FRIENDS AS IF SELECTED IN GUI
     # compare_list = ['PostalBeatle398', 'StinkyTurtlShel', 'JettH17', 'Yellowacorn101', 'SEIBERTINSANO81']
@@ -58,66 +66,23 @@ def connect(gt):
     # print(compare_selected(compare_list))
 
     # print out stored friend data
-    # for friend in friends:
-    # print()
-    # print(friend + ': ' + str(friends[friend]))
+    for friend in friends:
+        print()
+        print(friend + ': ' + str(friends[friend]))
 
-
-# gets the users profile information and games list
-def get_prof(gamer_tag):
-    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gamer_tag), headers=headers)
-    resp_data = response.json()
-    get_my_games()
     resp_data['games'] = player['games']
     return resp_data
 
 
-# prompt for Xbox Gamer tag and return the xuid
-def get_user(gt):
-    # gt = input('Type in your Xbox Gamertag: ')
-    # print()
-
-    # lookup by gamertag to get id
-    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
-
+# NOT BEING USED!!!!
+# gets the users profile information and games list
+def get_prof(gamer_tag):
+    response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gamer_tag), headers=headers)
     resp_data = response.json()
+    # get_my_games()
+    resp_data['games'] = player['games']
+    return resp_data
 
-    # Checks validity of gamertag and prompts the user again if it is invalid
-    while not ('profileUsers' in resp_data.keys()):
-        print("!!Invalid Gamertag try again!!")
-        gt = input('Type in your Xbox Gamertag: ')
-        response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
-        resp_data = response.json()
-
-    # Use this to print header info if needed
-    # print(response.headers)
-    xuid = 0
-    for data in resp_data['profileUsers']:
-        xuid = data['id']
-
-    return xuid
-
-
-def get_gamer_pic(person):
-    # Gets and saves gamerpic in "{xuid}.png" format, has a default profile pic if call fails
-    try:
-
-        request = Request(person['displayPicRaw'], headers={'User-Agent': 'Mozilla/5.0'})
-        response = urlopen(request)
-        with open('static/Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
-            f.write(response.read())
-    except:
-        with open('static/Gamerpics/gp_' + str(person['displayName'] + '.png'), "wb") as f:
-            with open('static/Gamerpics/defaultpic.png', 'rb') as overwrite:
-                f.write(overwrite.read())
-
-
-# Graceful program closing method
-def close():
-    print("Clearing gamerpic files...")
-    for pic in os.listdir("static/Gamerpics"):
-        if pic != "defaultpic.png":
-            os.remove("static/Gamerpics/" + pic);
 
 
 # of the selected friends return the games that you have in common with those friends
@@ -176,7 +141,7 @@ def get_friend_data(person):
     friend_data['displayPicRaw'] = person['displayPicRaw']
 
     # Stores the gamer pic in ./static/Gamerpics
-    get_gamer_pic(person)
+    #get_gamer_pic(person)
 
     friend = {person['displayName']: friend_data}
     friends.update(friend)
@@ -201,7 +166,6 @@ def get_my_games():
 
 
 if __name__ == '__main__':
-    # connect()
-
+    #connect()
     start_gui()
     close()
