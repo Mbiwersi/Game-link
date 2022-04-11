@@ -13,6 +13,7 @@ header{
     background-color: #5a5959;
     display: flex;
     padding: 1%;
+    justify-content: space-between;
 
 }
 header>h1{
@@ -53,9 +54,12 @@ form.profilePrompt{
     display: block;
     text-align: center;
     font-size: 1em;
+}
 
-
-
+#friends-games-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #5a5959;
 }
 
 #friends-container {
@@ -66,19 +70,39 @@ form.profilePrompt{
     border: 1px solid #68cb58;
 }
 
-#games{
-    width: 70%;
+#friends-container h1 {
+    color:#68cb58;
+}
 
+#games{
+    width: 40%;
+    float: left;
     background-color: #5a5959;
     justify-content: end;
 }
+
+#games h1 {
+    text-align: center;
+    color: #68cb58;
+    border: 1px solid #68cb58;
+}
+
 .game{
     width: 20%;
     border: 1px solid #68cb58;
+    display: inline-block;
 }
 .gameimg{
     width: 7em;
     height: 7em;
+}
+
+.game p {
+    color: white;
+    margin-left: 1em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 
@@ -100,8 +124,13 @@ form.profilePrompt{
 
 
 #selectFriends img {
-    height: 2em;
-    width: 2em;
+    height: 3.5em;
+    width: 3.5em;
     border-radius: 50%;
     margin-right: 2%;
+}
+
+#games-in-common{
+    background-color: #5a5959;
+    color: #68cb58;
 }

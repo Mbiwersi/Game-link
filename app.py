@@ -25,5 +25,9 @@ def get_friends(gt):
         #gl.connect(gt)
     return gl.friends
 
+# @app.route('profile/<gt>/friends/incommon')
+# def games_in_common(gt):
+#     return gl.compare_selected(postbody)
+
 def start():
     app.run(debug=True)

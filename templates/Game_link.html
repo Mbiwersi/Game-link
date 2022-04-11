@@ -21,16 +21,21 @@
         <input type="text" id="usrname" >
         <input type="submit" value="Search" onclick="loadProfile()">
     </form>
-    <div id="friends-container">
-        <h1>Friends</h1>
-        <span id="loading">Loading Friends ...</span>
-        <form id="selectFriends" onsubmit="return false">
-           <div  id="friendButtons" class="btn-group-toggle" data-toggle="buttons">
-           </div>
-        </form>
-    </div>
-    <div id="games">
-
+    <h1 id="loading-friends">Loading Your Profile...</h1>
+    <div id="friends-games-container">
+        <div id="friends-container">
+            <h1>Friends</h1>
+            <form id="selectFriends" onsubmit="return false">
+               <div  id="friendButtons" class="btn-group-toggle" data-toggle="buttons">
+               </div>
+            </form>
+        </div>
+        <div id="games-in-common">
+            <h1>Games in Common</h1>
+        </div>
+        <div id="games">
+            <h1>Your Games</h1>
+        </div>
     </div>
 
 </body>
