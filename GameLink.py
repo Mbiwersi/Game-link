@@ -20,6 +20,7 @@ def connect(gt):
     # ryan token wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg
     # andrew token k0cwwccokkogcgs0sgkgcgkcwskko0g8s8c
     # michael token wsg8gwgsc48ogwskcwggcswgs840ok04o04
+    # test token 8kowgs4wggowosc0o4cssw80884ckks8w44
 
     response = requests.get('https://xbl.io/api/v2/friends/search?gt={}'.format(gt), headers=headers)
     resp_data = response.json()
@@ -143,7 +144,7 @@ def get_friend_data(person):
     # Stores the gamer pic in ./static/Gamerpics
     #get_gamer_pic(person)
 
-    friend = {person['displayName']: friend_data}
+    friend = {person['displayName'].capitalize(): friend_data}
     friends.update(friend)
 
 
@@ -168,4 +169,3 @@ def get_my_games():
 if __name__ == '__main__':
     #connect()
     start_gui()
-    close()

@@ -51,26 +51,93 @@ function loadFriends() {
     .then((p) => p.json())
     .then(function (friends) {
       console.log(friends);
-      friendslist = Object.keys(friends);
+      friendslist = Object.keys(friends).sort();
       console.log(friendslist);
+      // First adds users that are online and favorites
       friendslist.forEach((friend) => {
-        $(`#friendButtons`).append(`
+          if(friends[friend].presenceState == 'Online' && friends[friend].isFavorite)
+          {
+              $(`#friendButtons`).append(`
         <label for="${friend}" class="btn btn-secondary active profile">
           <img src=${
-            friends[friend].displayPicRaw
-          } onerror="this.onerror=null; this.src=/Gamerpics/defaultpic.png;"/>
+                  friends[friend].displayPicRaw
+              } onerror="this.onerror=null; this.src=/Gamerpics/defaultpic.png;"/>
           
           <p>
             <span style='color: ${
-              friends[friend].presenceState == "Online" ? "#68cb58" : "red"
-            }'>${friend}</span>
-            ${friends[friend].presenceState}
+                  friends[friend].presenceState == "Online" ? "#68cb58" : "red"
+              }'>${friend}*</span>
           </p>
           <input type="checkbox" id="${friend}">
         </label>
          
-       `);
+            `);
+          }
       });
+      // Then adds users that are online and not favorites
+      friendslist.forEach((friend) => {
+          if(friends[friend].presenceState == 'Online' && !friends[friend].isFavorite)
+          {
+              $(`#friendButtons`).append(`
+        <label for="${friend}" class="btn btn-secondary active profile">
+          <img src=${
+                  friends[friend].displayPicRaw
+              } onerror="this.onerror=null; this.src=/Gamerpics/defaultpic.png;"/>
+          
+          <p>
+            <span style='color: ${
+                  friends[friend].presenceState == "Online" ? "#68cb58" : "red"
+              }'>${friend}</span>
+          </p>
+          <input type="checkbox" id="${friend}">
+        </label>
+         
+            `);
+          }
+      });
+      // Then adds users that are not online and are favorites
+      friendslist.forEach((friend) => {
+          if(friends[friend].presenceState != 'Online' && friends[friend].isFavorite)
+          {
+              $(`#friendButtons`).append(`
+        <label for="${friend}" class="btn btn-secondary active profile">
+          <img src=${
+                  friends[friend].displayPicRaw
+              } onerror="this.onerror=null; this.src=/Gamerpics/defaultpic.png;"/>
+          
+          <p>
+            <span style='color: ${
+                  friends[friend].presenceState == "Online" ? "#68cb58" : "red"
+              }'>${friend}*</span>
+          </p>
+          <input type="checkbox" id="${friend}">
+        </label>
+         
+            `);
+          }
+      });
+      // Then adds users that are not online and are not favorites
+      friendslist.forEach((friend) => {
+          if(friends[friend].presenceState != 'Online' && !friends[friend].isFavorite)
+          {
+              $(`#friendButtons`).append(`
+        <label for="${friend}" class="btn btn-secondary active profile">
+          <img src=${
+                  friends[friend].displayPicRaw
+              } onerror="this.onerror=null; this.src=/Gamerpics/defaultpic.png;"/>
+          
+          <p>
+            <span style='color: ${
+                  friends[friend].presenceState == "Online" ? "#68cb58" : "red"
+              }'>${friend}</span>
+          </p>
+          <input type="checkbox" id="${friend}">
+        </label>
+         
+            `);
+          }
+      });
+
       // $('#friends-container').append(`<button type="button" id="more-friends-btn" class="btn btn-primary">Show More</button>`)
 
       // $('#more-friends-btn').click( () => {
@@ -95,7 +162,7 @@ function loadFriends() {
     })
     .catch(function (error) {
       $("#friends-container").append(
-        $("<span> Sorry no friends where found </span>")
+        $("<span> Sorry no friends were found </span>")
       );
     });
 }

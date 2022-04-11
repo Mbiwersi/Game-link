@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62db52b8-57b4-419d-8336-00557c64162c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Game_Link.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game_Link.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameLink.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLink.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/gamelink.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/gamelink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +61,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\benny\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\ryjay\AppData\Local\Microsoft\WindowsApps\python3.9.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -106,6 +106,11 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Flask server.Game_Link" />
+      <item itemvalue="Flask server.Flask (app.py)" />
+      <item itemvalue="Python.GameLink" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.GameLink" />
@@ -125,6 +130,7 @@
       <workItem from="1647358413348" duration="2687000" />
       <workItem from="1647362706486" duration="339000" />
       <workItem from="1648055200336" duration="2401000" />
+      <workItem from="1649651234702" duration="8045000" />
     </task>
     <servers />
   </component>
@@ -141,17 +147,19 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/GameLink.py</url>
-          <line>128</line>
+          <line>130</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/GameLink_py$GameLink.coverage" NAME="GameLink Coverage Results" MODIFIED="1649665249855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
