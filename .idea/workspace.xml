@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62db52b8-57b4-419d-8336-00557c64162c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Game_Link.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game_Link.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="62db52b8-57b4-419d-8336-00557c64162c" name="Changes" comment="Changes to sorting friends">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameLink.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLink.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/gamelink.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/gamelink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,8 +127,17 @@
       <workItem from="1647358413348" duration="2687000" />
       <workItem from="1647362706486" duration="339000" />
       <workItem from="1648055200336" duration="2401000" />
-      <workItem from="1649651234702" duration="8045000" />
+      <workItem from="1649651234702" duration="8550000" />
+      <workItem from="1649667716605" duration="882000" />
     </task>
+    <task id="LOCAL-00001" summary="Changes to sorting friends">
+      <created>1649665627928</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649665627928</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,18 +154,22 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changes to sorting friends" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to sorting friends" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/GameLink.py</url>
-          <line>130</line>
+          <line>133</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/GameLink_py$GameLink.coverage" NAME="GameLink Coverage Results" MODIFIED="1649665249855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GameLink_py$GameLink.coverage" NAME="GameLink Coverage Results" MODIFIED="1649668494547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

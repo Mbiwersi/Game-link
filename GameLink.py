@@ -15,6 +15,10 @@ friends = dict()
 
 
 def connect(gt):
+    global player, friends
+    player = dict()
+    friends = dict()
+
     # Need this header to tie into my account info. If you want to test with your account, replace the
     # key from the OpenXBL Site
     # ryan token wcckckkwgg4k0g4s8g4cgc0ggw08skskwwg
