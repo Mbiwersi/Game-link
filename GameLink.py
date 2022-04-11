@@ -109,6 +109,7 @@ def find_matches(friend):
 
     # Adding games in common to stored friends data
     friends[friend]['games_in_common'] = friend_games_in_common
+    return friend_games_in_common
 
 
 # takes a list of the display names of selected friends and returns a list of the games that all friends have in common

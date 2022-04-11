@@ -1,3 +1,6 @@
+import json
+from functools import reduce
+
 from flask import Flask, render_template ,request
 
 import requests
@@ -25,9 +28,27 @@ def get_friends(gt):
         #gl.connect(gt)
     return gl.friends
 
-# @app.route('profile/<gt>/friends/incommon')
-# def games_in_common(gt):
-#     return gl.compare_selected(postbody)
+
+@app.route('/profile/friends/incommon',methods=["POST"])
+def games_in_common():
+    friends= json.loads(request.data)
+    games=[]
+    if len(friends)!=0 :
+        for f in friends:
+            games.append(gl.find_matches(f))
+        if len(games) != 0:
+            res = list(reduce(lambda i, j: i & j, (set(n) for n in games)))
+            games = [g for g in gl.player['games'] if g['name'] in res]
+        else :
+            return {'incommon': games}
+
+
+    return {'incommon': games}
+
+
+
+
+
 
 def start():
     app.run(debug=True)

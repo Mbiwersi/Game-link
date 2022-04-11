@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", main);
 
 let username = "";
-
+let curprof;
 function main() {
   $("#profile").hide();
   $("#friends-games-container").hide();
@@ -19,6 +19,7 @@ function loadProfile() {
   fetch("profile/" + username)
     .then((p) => p.json())
     .then(function (profile) {
+        curprof=profile;
       $("#profilePicture").attr(
         "src",
         profile.profileUsers[0].settings[0].value
@@ -173,6 +174,41 @@ function games_in_common() {
   // Make post request with body being the list of selected friends
 
   // display the games in the dom
+    let selected=[]
+
+    $('#friendButtons > label > input').each(function (friend){
+        if($(this)[0].checked){
+            selected.push($(this).attr('id'));
+        }
+    });
+
+    $("#incommon-list").empty()
+    $("#incommon-list").append($("<li class='spinner-border text-success loading' role='status'><span class='sr-only'></span></li>"));
+
+    fetch('profile/friends/incommon',{method :'POST' , body : JSON.stringify(selected)}).then(r=>r.json()).then(function (games){
+        if(games['incommon'].length>0){
+            games['incommon'].forEach(function (game) {
+                $("#incommon-list").append(
+                "<li class='game'><img class='gameimg' src='" +
+                game.image +
+                "'><p>" +
+                game.name +
+                "</p></li>"
+            );
+        });
+        }
+
+        else{
+            $("#incommon-list").append('<li>Sorry no games were found :(</li>');
+        }
+        $('.loading').remove();
+
+
+    });
+
+
+
+
 }
 
 function clearElementById(id) {
