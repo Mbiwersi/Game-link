@@ -63,7 +63,7 @@ form.profilePrompt{
 }
 
 #friends-container {
-    padding: 2em;
+    padding: 1%;
     width: 20%;
     justify-content: start;
     background-color: #5a5959;
@@ -93,13 +93,12 @@ form.profilePrompt{
     display: inline-block;
 }
 .gameimg{
-    width: 7em;
-    height: 7em;
+    width: 75%;
+    height: 75%;
 }
 
 .game p {
     color: white;
-    margin-left: 1em;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -115,6 +114,11 @@ form.profilePrompt{
     font-size: .75em;
     flex-flow: column wrap;
 
+}
+
+#selectFriends img{
+    width 20%;
+    height 20%;
 }
 
 .profile{
@@ -134,4 +138,8 @@ form.profilePrompt{
     background-color: #5a5959;
     color: #68cb58;
     padding: 1em;
+}
+
+#incommon-list {
+    margin-top: 1rem
 }
